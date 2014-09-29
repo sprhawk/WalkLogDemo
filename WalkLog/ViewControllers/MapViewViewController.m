@@ -86,9 +86,9 @@
         CLLocationCoordinate2D coor = l.coordinate;
         double lat = 0;
         double lon = 0;
-        mars_corrected_coordinate(coor.longitude, coor.latitude, &lon, &lat);
         NSLog(@"CoreLocation location:lon:%f, lat:%f", coor.longitude, coor.latitude);
 
+        mars_corrected_coordinate(coor.longitude, coor.latitude, &lon, &lat);
         CLLocationCoordinate2D c = [[EarthToMars sharedEarthToMars] marsCoordinateFromEarth:coor];
         NSLog(@"mars:calculated:lon:%f, lat:%f, lookup:lon:%f, lat:%f", lon, lat, c.longitude, c.latitude);
     }
