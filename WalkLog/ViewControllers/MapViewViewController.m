@@ -84,6 +84,7 @@
 {
     if ([annotation isKindOfClass:[MyLocationAnnotation class]]) {
         MKPinAnnotationView *v = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"pin"];
+        v.canShowCallout = YES;
         MyLocationAnnotation *a = annotation;
         switch (a.type) {
             case AnnotationTypeCalculated:
@@ -117,10 +118,12 @@
         MyLocationAnnotation *a = [[MyLocationAnnotation alloc] init];
         a.coordinate = c;
         a.type = AnnotationTypeLookup;
+        a.title = @"Lookup";
         [self.mapView addAnnotation:a];
         
         a = [[MyLocationAnnotation alloc] init];
         a.type = AnnotationTypeCalculated;
+        a.title = @"Calculated";
         a.coordinate = CLLocationCoordinate2DMake(lat, lon);
         [self.mapView addAnnotation:a];
     }
