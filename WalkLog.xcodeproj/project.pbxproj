@@ -19,6 +19,15 @@
 		437DB1F419D93E6E0011D8E6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 437DB1DC19D93E6E0011D8E6 /* UIKit.framework */; };
 		437DB1FC19D93E6E0011D8E6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 437DB1FA19D93E6E0011D8E6 /* InfoPlist.strings */; };
 		437DB1FE19D93E6E0011D8E6 /* WalkLogTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 437DB1FD19D93E6E0011D8E6 /* WalkLogTests.m */; };
+		437DB20E19D9409E0011D8E6 /* CSqlite.m in Sources */ = {isa = PBXBuildFile; fileRef = 437DB20C19D9409E0011D8E6 /* CSqlite.m */; };
+		437DB20F19D9409E0011D8E6 /* gps.db in Resources */ = {isa = PBXBuildFile; fileRef = 437DB20D19D9409E0011D8E6 /* gps.db */; };
+		437DB21119D940C00011D8E6 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 437DB21019D940C00011D8E6 /* CoreLocation.framework */; };
+		437DB21319D940C70011D8E6 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 437DB21219D940C70011D8E6 /* MapKit.framework */; };
+		437DB21519D940DD0011D8E6 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 437DB21419D940DD0011D8E6 /* Storyboard.storyboard */; };
+		437DB21919D95CFC0011D8E6 /* MapViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 437DB21819D95CFC0011D8E6 /* MapViewViewController.m */; };
+		437DB22019D960970011D8E6 /* MarsCoordinate.c in Sources */ = {isa = PBXBuildFile; fileRef = 437DB21F19D960970011D8E6 /* MarsCoordinate.c */; };
+		437DB22219D967D40011D8E6 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 437DB22119D967D40011D8E6 /* libsqlite3.dylib */; };
+		437DB22719D968240011D8E6 /* EarthToMars.m in Sources */ = {isa = PBXBuildFile; fileRef = 437DB22619D968240011D8E6 /* EarthToMars.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +57,19 @@
 		437DB1F919D93E6E0011D8E6 /* WalkLogTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "WalkLogTests-Info.plist"; sourceTree = "<group>"; };
 		437DB1FB19D93E6E0011D8E6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		437DB1FD19D93E6E0011D8E6 /* WalkLogTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalkLogTests.m; sourceTree = "<group>"; };
+		437DB20B19D9409E0011D8E6 /* CSqlite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSqlite.h; sourceTree = "<group>"; };
+		437DB20C19D9409E0011D8E6 /* CSqlite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSqlite.m; sourceTree = "<group>"; };
+		437DB20D19D9409E0011D8E6 /* gps.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = gps.db; sourceTree = "<group>"; };
+		437DB21019D940C00011D8E6 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		437DB21219D940C70011D8E6 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		437DB21419D940DD0011D8E6 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
+		437DB21719D95CFC0011D8E6 /* MapViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewViewController.h; sourceTree = "<group>"; };
+		437DB21819D95CFC0011D8E6 /* MapViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewViewController.m; sourceTree = "<group>"; };
+		437DB21E19D95F3A0011D8E6 /* MarsCoordinate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MarsCoordinate.h; sourceTree = "<group>"; };
+		437DB21F19D960970011D8E6 /* MarsCoordinate.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = MarsCoordinate.c; sourceTree = "<group>"; };
+		437DB22119D967D40011D8E6 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		437DB22519D968240011D8E6 /* EarthToMars.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EarthToMars.h; sourceTree = "<group>"; };
+		437DB22619D968240011D8E6 /* EarthToMars.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EarthToMars.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +77,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				437DB22219D967D40011D8E6 /* libsqlite3.dylib in Frameworks */,
+				437DB21319D940C70011D8E6 /* MapKit.framework in Frameworks */,
+				437DB21119D940C00011D8E6 /* CoreLocation.framework in Frameworks */,
 				437DB1DB19D93E6E0011D8E6 /* CoreGraphics.framework in Frameworks */,
 				437DB1DD19D93E6E0011D8E6 /* UIKit.framework in Frameworks */,
 				437DB1D919D93E6E0011D8E6 /* Foundation.framework in Frameworks */,
@@ -77,6 +102,7 @@
 		437DB1CC19D93E6E0011D8E6 = {
 			isa = PBXGroup;
 			children = (
+				437DB20919D9409E0011D8E6 /* thirdparties */,
 				437DB1DE19D93E6E0011D8E6 /* WalkLog */,
 				437DB1F719D93E6E0011D8E6 /* WalkLogTests */,
 				437DB1D719D93E6E0011D8E6 /* Frameworks */,
@@ -96,6 +122,9 @@
 		437DB1D719D93E6E0011D8E6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				437DB22119D967D40011D8E6 /* libsqlite3.dylib */,
+				437DB21219D940C70011D8E6 /* MapKit.framework */,
+				437DB21019D940C00011D8E6 /* CoreLocation.framework */,
 				437DB1D819D93E6E0011D8E6 /* Foundation.framework */,
 				437DB1DA19D93E6E0011D8E6 /* CoreGraphics.framework */,
 				437DB1DC19D93E6E0011D8E6 /* UIKit.framework */,
@@ -107,10 +136,13 @@
 		437DB1DE19D93E6E0011D8E6 /* WalkLog */ = {
 			isa = PBXGroup;
 			children = (
+				437DB21A19D95D280011D8E6 /* Utility */,
+				437DB21619D95CD80011D8E6 /* ViewControllers */,
 				437DB1E719D93E6E0011D8E6 /* AppDelegate.h */,
 				437DB1E819D93E6E0011D8E6 /* AppDelegate.m */,
 				437DB1EA19D93E6E0011D8E6 /* Images.xcassets */,
 				437DB1DF19D93E6E0011D8E6 /* Supporting Files */,
+				437DB21419D940DD0011D8E6 /* Storyboard.storyboard */,
 			);
 			path = WalkLog;
 			sourceTree = "<group>";
@@ -142,6 +174,44 @@
 				437DB1FA19D93E6E0011D8E6 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		437DB20919D9409E0011D8E6 /* thirdparties */ = {
+			isa = PBXGroup;
+			children = (
+				437DB20A19D9409E0011D8E6 /* Mars */,
+			);
+			path = thirdparties;
+			sourceTree = "<group>";
+		};
+		437DB20A19D9409E0011D8E6 /* Mars */ = {
+			isa = PBXGroup;
+			children = (
+				437DB20B19D9409E0011D8E6 /* CSqlite.h */,
+				437DB20C19D9409E0011D8E6 /* CSqlite.m */,
+				437DB20D19D9409E0011D8E6 /* gps.db */,
+			);
+			path = Mars;
+			sourceTree = "<group>";
+		};
+		437DB21619D95CD80011D8E6 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				437DB21719D95CFC0011D8E6 /* MapViewViewController.h */,
+				437DB21819D95CFC0011D8E6 /* MapViewViewController.m */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		437DB21A19D95D280011D8E6 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				437DB21E19D95F3A0011D8E6 /* MarsCoordinate.h */,
+				437DB21F19D960970011D8E6 /* MarsCoordinate.c */,
+				437DB22519D968240011D8E6 /* EarthToMars.h */,
+				437DB22619D968240011D8E6 /* EarthToMars.m */,
+			);
+			path = Utility;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -220,7 +290,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				437DB1E319D93E6E0011D8E6 /* InfoPlist.strings in Resources */,
+				437DB21519D940DD0011D8E6 /* Storyboard.storyboard in Resources */,
 				437DB1EB19D93E6E0011D8E6 /* Images.xcassets in Resources */,
+				437DB20F19D9409E0011D8E6 /* gps.db in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -241,6 +313,10 @@
 			files = (
 				437DB1E919D93E6E0011D8E6 /* AppDelegate.m in Sources */,
 				437DB1E519D93E6E0011D8E6 /* main.m in Sources */,
+				437DB22719D968240011D8E6 /* EarthToMars.m in Sources */,
+				437DB22019D960970011D8E6 /* MarsCoordinate.c in Sources */,
+				437DB21919D95CFC0011D8E6 /* MapViewViewController.m in Sources */,
+				437DB20E19D9409E0011D8E6 /* CSqlite.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -357,10 +433,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WalkLog/WalkLog-Prefix.pch";
 				INFOPLIST_FILE = "WalkLog/WalkLog-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "20F7C822-0F84-4A9F-ABA4-4F72DE91A475";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -374,6 +452,7 @@
 				GCC_PREFIX_HEADER = "WalkLog/WalkLog-Prefix.pch";
 				INFOPLIST_FILE = "WalkLog/WalkLog-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "20F7C822-0F84-4A9F-ABA4-4F72DE91A475";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -437,6 +516,7 @@
 				437DB20319D93E6E0011D8E6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		437DB20419D93E6E0011D8E6 /* Build configuration list for PBXNativeTarget "WalkLogTests" */ = {
 			isa = XCConfigurationList;
@@ -445,6 +525,7 @@
 				437DB20619D93E6E0011D8E6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
