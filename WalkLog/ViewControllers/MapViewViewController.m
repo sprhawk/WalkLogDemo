@@ -13,6 +13,8 @@
 #import "MarsCoordinate.h"
 #import "EarthToMars.h"
 
+#import "MyLocationAnnotation.h"
+
 @interface MapViewViewController () <MKMapViewDelegate, CLLocationManagerDelegate>
 {
     CLLocationManager * _locationManager;
@@ -71,11 +73,31 @@
     CLLocation *l = userLocation.location;
     if (l) {
         CLLocationCoordinate2D coor = l.coordinate;
-        NSLog(@"MapView User Location:lon:%f, lat:%f", coor.longitude, coor.latitude);
+        NSLog(@"MapView User Location:lat:%f, lon:%f", coor.longitude, coor.latitude);
         
         MKCoordinateRegion r = MKCoordinateRegionMakeWithDistance(coor, 200, 200);
         [mapView setRegion:r animated:YES];
     }
+}
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
+{
+    if ([annotation isKindOfClass:[MyLocationAnnotation class]]) {
+        MKPinAnnotationView *v = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"pin"];
+        MyLocationAnnotation *a = annotation;
+        switch (a.type) {
+            case AnnotationTypeCalculated:
+                v.pinColor = MKPinAnnotationColorRed;
+                break;
+            case AnnotationTypeLookup:
+                v.pinColor = MKPinAnnotationColorGreen;
+                break;
+            default:
+                break;
+        }
+        return v;
+    }
+    return nil;
 }
 
 #pragma mark - Location Manager
@@ -86,11 +108,21 @@
         CLLocationCoordinate2D coor = l.coordinate;
         double lat = 0;
         double lon = 0;
-        NSLog(@"CoreLocation location:lon:%f, lat:%f", coor.longitude, coor.latitude);
+        NSLog(@"CoreLocation location:lat:%f, lon:%f", coor.longitude, coor.latitude);
 
-        mars_corrected_coordinate(coor.longitude, coor.latitude, &lon, &lat);
+        mars_corrected_coordinate(coor.latitude, coor.longitude, &lat, &lon);
         CLLocationCoordinate2D c = [[EarthToMars sharedEarthToMars] marsCoordinateFromEarth:coor];
-        NSLog(@"mars:calculated:lon:%f, lat:%f, lookup:lon:%f, lat:%f", lon, lat, c.longitude, c.latitude);
+        NSLog(@"mars:calculated:lat:%f, lon:%f, lookup:lat:%f, lon:%f", lon, lat, c.longitude, c.latitude);
+        
+        MyLocationAnnotation *a = [[MyLocationAnnotation alloc] init];
+        a.coordinate = c;
+        a.type = AnnotationTypeLookup;
+        [self.mapView addAnnotation:a];
+        
+        a = [[MyLocationAnnotation alloc] init];
+        a.type = AnnotationTypeCalculated;
+        a.coordinate = CLLocationCoordinate2DMake(lat, lon);
+        [self.mapView addAnnotation:a];
     }
 }
 

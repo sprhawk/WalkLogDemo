@@ -23,7 +23,7 @@ const static double ee = 0.00669342162296594323;
 static double mars_transformed_latitude(double x, double y);
 static double mars_transformed_longitude(double x, double y);
 
-int mars_corrected_coordinate(double wgs_longitude, double wgs_latitude, double * pgcj_longitude, double *pgcj_latitude)
+int mars_corrected_coordinate(double wgs_latitude, double wgs_longitude, double *pgcj_latitude, double * pgcj_longitude)
 {
     if ((wgs_longitude < 72.004 || wgs_longitude > 137.8347)
         || (wgs_latitude < 0.8293 || wgs_latitude > 55.8257)) {

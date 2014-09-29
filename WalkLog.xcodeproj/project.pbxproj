@@ -28,6 +28,7 @@
 		437DB22019D960970011D8E6 /* MarsCoordinate.c in Sources */ = {isa = PBXBuildFile; fileRef = 437DB21F19D960970011D8E6 /* MarsCoordinate.c */; };
 		437DB22219D967D40011D8E6 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 437DB22119D967D40011D8E6 /* libsqlite3.dylib */; };
 		437DB22719D968240011D8E6 /* EarthToMars.m in Sources */ = {isa = PBXBuildFile; fileRef = 437DB22619D968240011D8E6 /* EarthToMars.m */; };
+		43C0F6AE19D9CCF400301169 /* MyLocationAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C0F6AD19D9CCF400301169 /* MyLocationAnnotation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +71,8 @@
 		437DB22119D967D40011D8E6 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		437DB22519D968240011D8E6 /* EarthToMars.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EarthToMars.h; sourceTree = "<group>"; };
 		437DB22619D968240011D8E6 /* EarthToMars.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EarthToMars.m; sourceTree = "<group>"; };
+		43C0F6AC19D9CCF400301169 /* MyLocationAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLocationAnnotation.h; sourceTree = "<group>"; };
+		43C0F6AD19D9CCF400301169 /* MyLocationAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyLocationAnnotation.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -199,6 +202,8 @@
 			children = (
 				437DB21719D95CFC0011D8E6 /* MapViewViewController.h */,
 				437DB21819D95CFC0011D8E6 /* MapViewViewController.m */,
+				43C0F6AC19D9CCF400301169 /* MyLocationAnnotation.h */,
+				43C0F6AD19D9CCF400301169 /* MyLocationAnnotation.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -315,6 +320,7 @@
 				437DB1E519D93E6E0011D8E6 /* main.m in Sources */,
 				437DB22719D968240011D8E6 /* EarthToMars.m in Sources */,
 				437DB22019D960970011D8E6 /* MarsCoordinate.c in Sources */,
+				43C0F6AE19D9CCF400301169 /* MyLocationAnnotation.m in Sources */,
 				437DB21919D95CFC0011D8E6 /* MapViewViewController.m in Sources */,
 				437DB20E19D9409E0011D8E6 /* CSqlite.m in Sources */,
 			);
