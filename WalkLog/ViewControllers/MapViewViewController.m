@@ -77,12 +77,11 @@
 #pragma mark - MapViewDelegate
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
 {
-    if (!self.isUserLocationSet) {
-        CLLocation *l = userLocation.location;
-        if (l) {
-            CLLocationCoordinate2D coor = l.coordinate;
-            NSLog(@"MapView User Location:lat:%f, lon:%f", coor.latitude, coor.longitude);
-            
+    CLLocation *l = userLocation.location;
+    if (l) {
+        CLLocationCoordinate2D coor = l.coordinate;
+        NSLog(@"MapView User Location:lat:%f, lon:%f", coor.latitude, coor.longitude);
+        if (!self.isUserLocationSet) {
             MKCoordinateRegion r = MKCoordinateRegionMakeWithDistance(coor, 200, 200);
             [mapView setRegion:r animated:YES];
             self.isUserLocationSet = YES;
