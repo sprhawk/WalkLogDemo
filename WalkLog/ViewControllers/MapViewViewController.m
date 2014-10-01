@@ -48,13 +48,13 @@
         _locationManager = [[CLLocationManager alloc] init];
         _locationManager.delegate = self;
     }
-    self.mapView.userTrackingMode = MKUserTrackingModeFollowWithHeading;
+    self.navigationController.navigationBarHidden = YES;
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [_locationManager startUpdatingLocation];
+    [self startUpdatingLocation];
 }
 
 - (void)didReceiveMemoryWarning
@@ -112,7 +112,43 @@
     return nil;
 }
 
+- (void)mapView:(MKMapView *)mapView didFailToLocateUserWithError:(NSError *)error
+{
+    NSLog(@"didFailToLocateUserWithError:%@", error);
+}
+
+- (void)mapViewDidFailLoadingMap:(MKMapView *)mapView withError:(NSError *)error
+{
+    NSLog(@"mapViewDidFailLoadingMap:%@", error);
+}
+
+#pragma mark - Location operations
+- (void)startUpdatingLocation
+{
+    CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
+    if (kCLAuthorizationStatusAuthorized == status
+        || kCLAuthorizationStatusAuthorizedAlways == status
+        || kCLAuthorizationStatusAuthorizedWhenInUse == status) {
+//        [_locationManager startUpdatingLocation];
+        
+        self.mapView.showsUserLocation = YES;
+        self.mapView.userTrackingMode = MKUserTrackingModeFollowWithHeading;
+    }
+    else if(kCLAuthorizationStatusNotDetermined == status) {
+        [_locationManager requestWhenInUseAuthorization];
+    }
+    else if(kCLAuthorizationStatusDenied == status
+            || kCLAuthorizationStatusRestricted == status) {
+        
+    }
+}
+
 #pragma mark - Location Manager
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
+{
+    [self startUpdatingLocation];
+}
+
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
     CLLocation *l = [locations lastObject];

@@ -33,24 +33,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HlS-2b-Pie">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="HlS-2b-Pie">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <connections>
                                     <outlet property="delegate" destination="lnv-ew-ohG" id="hv9-3i-8Vd"/>
                                 </connections>
                             </mapView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wEs-8a-Vgg">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                <items>
-                                    <barButtonItem title="Item" id="VaZ-QH-IAo"/>
-                                </items>
-                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="KEn-XT-56N" firstAttribute="top" secondItem="HlS-2b-Pie" secondAttribute="bottom" id="B2m-cL-P79"/>
                             <constraint firstItem="HlS-2b-Pie" firstAttribute="leading" secondItem="Ma1-s3-pWm" secondAttribute="leadingMargin" constant="-16" id="BvE-4A-U5B"/>
-                            <constraint firstItem="wEs-8a-Vgg" firstAttribute="top" secondItem="mtt-CT-puG" secondAttribute="bottom" constant="-20" id="G0d-Xi-6NX"/>
                             <constraint firstAttribute="trailingMargin" secondItem="HlS-2b-Pie" secondAttribute="trailing" constant="-16" id="JwD-qb-dQ2"/>
                             <constraint firstItem="HlS-2b-Pie" firstAttribute="top" secondItem="mtt-CT-puG" secondAttribute="bottom" constant="-20" id="tsQ-WQ-ahW"/>
                         </constraints>
