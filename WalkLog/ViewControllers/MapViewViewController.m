@@ -81,7 +81,7 @@
         CLLocation *l = userLocation.location;
         if (l) {
             CLLocationCoordinate2D coor = l.coordinate;
-            NSLog(@"MapView User Location:lat:%f, lon:%f", coor.longitude, coor.latitude);
+            NSLog(@"MapView User Location:lat:%f, lon:%f", coor.latitude, coor.longitude);
             
             MKCoordinateRegion r = MKCoordinateRegionMakeWithDistance(coor, 200, 200);
             [mapView setRegion:r animated:YES];
@@ -121,11 +121,11 @@
         CLLocationCoordinate2D coor = l.coordinate;
         double lat = 0;
         double lon = 0;
-        NSLog(@"CoreLocation location:lat:%f, lon:%f", coor.longitude, coor.latitude);
+        NSLog(@"CoreLocation location:lat:%f, lon:%f", coor.latitude, coor.longitude);
 
         mars_corrected_coordinate(coor.latitude, coor.longitude, &lat, &lon);
         CLLocationCoordinate2D c = [[EarthToMars sharedEarthToMars] marsCoordinateFromEarth:coor];
-        NSLog(@"mars:calculated:lat:%f, lon:%f, lookup:lat:%f, lon:%f", lon, lat, c.longitude, c.latitude);
+        NSLog(@"mars:calculated:lat:%f, lon:%f, lookup:lat:%f, lon:%f", lat, lon, c.latitude, c.longitude);
         
         MyLocationAnnotation *a = [[MyLocationAnnotation alloc] init];
         a.coordinate = c;
