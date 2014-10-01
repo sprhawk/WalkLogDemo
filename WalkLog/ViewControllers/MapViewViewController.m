@@ -19,6 +19,13 @@
 {
     CLLocationManager * _locationManager;
 }
+
+@property (nonatomic, strong, readwrite) id<MKAnnotation> calcAnnotation;
+@property (nonatomic, strong, readwrite) id<MKAnnotation> lookupAnnotation;
+@property (nonatomic, strong, readwrite) id<MKAnnotation> earthAnnotation;
+
+@property (nonatomic, assign, readwrite) BOOL isUserLocationSet;
+
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @end
 
@@ -70,13 +77,16 @@
 #pragma mark - MapViewDelegate
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
 {
-    CLLocation *l = userLocation.location;
-    if (l) {
-        CLLocationCoordinate2D coor = l.coordinate;
-        NSLog(@"MapView User Location:lat:%f, lon:%f", coor.longitude, coor.latitude);
-        
-        MKCoordinateRegion r = MKCoordinateRegionMakeWithDistance(coor, 200, 200);
-        [mapView setRegion:r animated:YES];
+    if (!self.isUserLocationSet) {
+        CLLocation *l = userLocation.location;
+        if (l) {
+            CLLocationCoordinate2D coor = l.coordinate;
+            NSLog(@"MapView User Location:lat:%f, lon:%f", coor.longitude, coor.latitude);
+            
+            MKCoordinateRegion r = MKCoordinateRegionMakeWithDistance(coor, 200, 200);
+            [mapView setRegion:r animated:YES];
+            self.isUserLocationSet = YES;
+        }
     }
 }
 
@@ -93,7 +103,9 @@
             case AnnotationTypeLookup:
                 v.pinColor = MKPinAnnotationColorGreen;
                 break;
+            case AnnotationTypeEarth:
             default:
+                v.pinColor = MKPinAnnotationColorPurple;
                 break;
         }
         return v;
@@ -119,13 +131,30 @@
         a.coordinate = c;
         a.type = AnnotationTypeLookup;
         a.title = @"Lookup";
-        [self.mapView addAnnotation:a];
+        if (self.lookupAnnotation) {
+            [self.mapView removeAnnotation:self.lookupAnnotation];
+        }
+        self.lookupAnnotation = a;
+        [self.mapView addAnnotation:self.lookupAnnotation];
         
         a = [[MyLocationAnnotation alloc] init];
         a.type = AnnotationTypeCalculated;
         a.title = @"Calculated";
         a.coordinate = CLLocationCoordinate2DMake(lat, lon);
-        [self.mapView addAnnotation:a];
+        if (self.calcAnnotation) {
+            [self.mapView removeAnnotation:self.calcAnnotation];
+        }
+        self.calcAnnotation = a;
+        [self.mapView addAnnotation:self.calcAnnotation];
+        
+        a = [[MyLocationAnnotation alloc] init];
+        a.coordinate = coor;
+        a.type = AnnotationTypeEarth;
+        if (self.earthAnnotation) {
+            [self.mapView removeAnnotation:self.earthAnnotation];
+        }
+        self.earthAnnotation = a;
+        [self.mapView addAnnotation:self.earthAnnotation];
     }
 }
 

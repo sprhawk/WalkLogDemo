@@ -9,6 +9,7 @@
 #import <MapKit/MapKit.h>
 
 typedef enum AnnotationType {
+    AnnotationTypeEarth,
     AnnotationTypeCalculated,
     AnnotationTypeLookup,
 }AnnotationType;
