@@ -150,6 +150,7 @@
         a = [[MyLocationAnnotation alloc] init];
         a.coordinate = coor;
         a.type = AnnotationTypeEarth;
+        a.title = @"Earth";
         if (self.earthAnnotation) {
             [self.mapView removeAnnotation:self.earthAnnotation];
         }
