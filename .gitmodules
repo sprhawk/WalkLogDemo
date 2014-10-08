@@ -1,0 +1,3 @@
+[submodule "lib/YSqliteStatement"]
+	path = lib/YSqliteStatement
+	url = git@github.com:sprhawk/YSqliteStatement.git
