@@ -27,8 +27,8 @@
         [self bindDouble:location.verticalAccuracy key:@":vaccuracy"];
         [self bindDouble:location.course key:@":course"];
         [self bindDouble:location.speed key:@":speed"];
-        NSTimeInterval t = [location.timestamp timeIntervalSince1970];
-        [self bindDouble:t key:@":timestamp"];
+        int64_t t = (int64_t)([location.timestamp timeIntervalSince1970] * 1000);
+        [self bindInt64:t key:@":timestamp"];
         
         return [self execute];
     }

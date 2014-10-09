@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 
+#define DataCenterDidInsertLocationNotification @"DataCenterDidInsertLocationNotification"
+
 @interface DataCenter : NSObject
 + (instancetype)sharedCenter;
 - (BOOL)insertLocation:(CLLocation *)location;

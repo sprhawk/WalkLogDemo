@@ -74,7 +74,13 @@
 
 - (BOOL)insertLocation:(CLLocation *)location
 {
-    return [self.insertLocationStatement insertLocation:location];
+    BOOL r = [self.insertLocationStatement insertLocation:location];
+    if (r) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:DataCenterDidInsertLocationNotification
+                                                            object:nil
+                                                          userInfo:@{@"location": location}];
+    }
+    return r;
 }
 
 - (NSUInteger)locationsCount

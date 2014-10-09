@@ -10,7 +10,11 @@
 #import "DataCenter.h"
 
 @interface DataListViewControllerTableViewController ()
+{
+    NSInteger locationsCount;
+}
 
+@property (nonatomic, strong, readwrite) NSMutableSet *observers;
 @end
 
 @implementation DataListViewControllerTableViewController
@@ -25,11 +29,27 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
 //    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"LocationCell"];
+    
+    __weak DataListViewControllerTableViewController *SELF = self;
+    id observer;
+    observer = [[NSNotificationCenter defaultCenter] addObserverForName:DataCenterDidInsertLocationNotification
+                                                                 object:nil
+                                                                  queue:nil
+                                                             usingBlock:^(NSNotification *note) {
+                                                                 locationsCount = [[DataCenter sharedCenter] locationsCount];
+                                                                 NSIndexPath *i = [NSIndexPath indexPathForRow:locationsCount - 1 inSection:0];
+                                                                 [SELF.tableView insertRowsAtIndexPaths:@[i] withRowAnimation:UITableViewRowAnimationAutomatic];
+                                                             }];
+    [self.observers addObject:observer];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    for (id o in self.observers) {
+        [[NSNotificationCenter defaultCenter] removeObserver:o];
+    }
+    [self.observers removeAllObjects];
 }
 
 #pragma mark - Table view data source
@@ -41,7 +61,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return [[DataCenter sharedCenter] locationsCount];
+    locationsCount = [[DataCenter sharedCenter] locationsCount];
+    return locationsCount;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
