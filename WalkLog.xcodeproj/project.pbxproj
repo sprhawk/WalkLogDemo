@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		434A9FBF19E57E99009D6176 /* SelectLocationStatement.m in Sources */ = {isa = PBXBuildFile; fileRef = 434A9FBE19E57E99009D6176 /* SelectLocationStatement.m */; };
+		434A9FC419E660FD009D6176 /* MyLocationAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 434A9FC319E660FD009D6176 /* MyLocationAnnotation.m */; };
 		437DB1D919D93E6E0011D8E6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 437DB1D819D93E6E0011D8E6 /* Foundation.framework */; };
 		437DB1DB19D93E6E0011D8E6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 437DB1DA19D93E6E0011D8E6 /* CoreGraphics.framework */; };
 		437DB1DD19D93E6E0011D8E6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 437DB1DC19D93E6E0011D8E6 /* UIKit.framework */; };
@@ -35,7 +36,6 @@
 		439A327F19E5454F00E9B5E6 /* InsertLocationStatement.m in Sources */ = {isa = PBXBuildFile; fileRef = 439A327E19E5454F00E9B5E6 /* InsertLocationStatement.m */; };
 		439A328419E569B500E9B5E6 /* DataListViewControllerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 439A328319E569B500E9B5E6 /* DataListViewControllerTableViewController.m */; };
 		439A328819E5746100E9B5E6 /* DataCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 439A328719E5746100E9B5E6 /* DataCenter.m */; };
-		43C0F6AE19D9CCF400301169 /* MyLocationAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C0F6AD19D9CCF400301169 /* MyLocationAnnotation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +58,8 @@
 /* Begin PBXFileReference section */
 		434A9FBD19E57E99009D6176 /* SelectLocationStatement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectLocationStatement.h; sourceTree = "<group>"; };
 		434A9FBE19E57E99009D6176 /* SelectLocationStatement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectLocationStatement.m; sourceTree = "<group>"; };
+		434A9FC219E660FD009D6176 /* MyLocationAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLocationAnnotation.h; sourceTree = "<group>"; };
+		434A9FC319E660FD009D6176 /* MyLocationAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyLocationAnnotation.m; sourceTree = "<group>"; };
 		437DB1D519D93E6E0011D8E6 /* WalkLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WalkLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		437DB1D819D93E6E0011D8E6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		437DB1DA19D93E6E0011D8E6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -96,8 +98,6 @@
 		439A328319E569B500E9B5E6 /* DataListViewControllerTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataListViewControllerTableViewController.m; sourceTree = "<group>"; };
 		439A328619E5746100E9B5E6 /* DataCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataCenter.h; sourceTree = "<group>"; };
 		439A328719E5746100E9B5E6 /* DataCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataCenter.m; sourceTree = "<group>"; };
-		43C0F6AC19D9CCF400301169 /* MyLocationAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLocationAnnotation.h; sourceTree = "<group>"; };
-		43C0F6AD19D9CCF400301169 /* MyLocationAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyLocationAnnotation.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +170,8 @@
 			children = (
 				437DB21A19D95D280011D8E6 /* Utility */,
 				437DB21619D95CD80011D8E6 /* ViewControllers */,
+				434A9FC219E660FD009D6176 /* MyLocationAnnotation.h */,
+				434A9FC319E660FD009D6176 /* MyLocationAnnotation.m */,
 				437DB1E719D93E6E0011D8E6 /* AppDelegate.h */,
 				437DB1E819D93E6E0011D8E6 /* AppDelegate.m */,
 				439A327D19E5454F00E9B5E6 /* InsertLocationStatement.h */,
@@ -238,8 +240,6 @@
 			children = (
 				437DB21719D95CFC0011D8E6 /* MapViewViewController.h */,
 				437DB21819D95CFC0011D8E6 /* MapViewViewController.m */,
-				43C0F6AC19D9CCF400301169 /* MyLocationAnnotation.h */,
-				43C0F6AD19D9CCF400301169 /* MyLocationAnnotation.m */,
 				439A328219E569B500E9B5E6 /* DataListViewControllerTableViewController.h */,
 				439A328319E569B500E9B5E6 /* DataListViewControllerTableViewController.m */,
 			);
@@ -397,8 +397,8 @@
 				437DB1E919D93E6E0011D8E6 /* AppDelegate.m in Sources */,
 				437DB1E519D93E6E0011D8E6 /* main.m in Sources */,
 				437DB22719D968240011D8E6 /* EarthToMars.m in Sources */,
+				434A9FC419E660FD009D6176 /* MyLocationAnnotation.m in Sources */,
 				437DB22019D960970011D8E6 /* MarsCoordinate.c in Sources */,
-				43C0F6AE19D9CCF400301169 /* MyLocationAnnotation.m in Sources */,
 				439A328419E569B500E9B5E6 /* DataListViewControllerTableViewController.m in Sources */,
 				439A328819E5746100E9B5E6 /* DataCenter.m in Sources */,
 				434A9FBF19E57E99009D6176 /* SelectLocationStatement.m in Sources */,
