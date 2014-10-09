@@ -212,6 +212,12 @@
 //        }
 //        self.earthAnnotation = a;
 //        [self.mapView addAnnotation:self.earthAnnotation];
+        
+        if (UIApplicationStateBackground == [UIApplication sharedApplication].applicationState) {
+            UILocalNotification *n = [[UILocalNotification alloc] init];
+            n.alertBody = [NSString stringWithFormat:@"lat:%f lon:%f", coor.latitude, coor.longitude];
+            [[UIApplication sharedApplication] presentLocalNotificationNow:n];
+        }
     }
 }
 
