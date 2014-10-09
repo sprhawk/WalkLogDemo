@@ -26,10 +26,10 @@
 	<true/>
 	<key>NSLocationUsageDescription</key>
 	<string>Positioning</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Positioning In Use</string>
 	<key>UIBackgroundModes</key>
-	<array>
-		<string>location</string>
-	</array>
+	<array/>
 	<key>UIMainStoryboardFile</key>
 	<string>Storyboard</string>
 	<key>UIRequiredDeviceCapabilities</key>
@@ -42,7 +42,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Positioning In Use</string>
 </dict>
 </plist>

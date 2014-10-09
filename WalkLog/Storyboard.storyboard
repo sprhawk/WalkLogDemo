@@ -30,7 +30,7 @@
                         <viewControllerLayoutGuide type="bottom" id="KEn-XT-56N"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Ma1-s3-pWm">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="HlS-2b-Pie">
@@ -41,22 +41,96 @@
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="KEn-XT-56N" firstAttribute="top" secondItem="HlS-2b-Pie" secondAttribute="bottom" id="B2m-cL-P79"/>
-                            <constraint firstItem="HlS-2b-Pie" firstAttribute="leading" secondItem="Ma1-s3-pWm" secondAttribute="leadingMargin" constant="-16" id="BvE-4A-U5B"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="HlS-2b-Pie" secondAttribute="trailing" constant="-16" id="JwD-qb-dQ2"/>
-                            <constraint firstItem="HlS-2b-Pie" firstAttribute="top" secondItem="mtt-CT-puG" secondAttribute="bottom" constant="-20" id="tsQ-WQ-ahW"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="HlS-2b-Pie" secondAttribute="trailing" constant="-16" id="KdO-16-Kd0"/>
+                            <constraint firstItem="HlS-2b-Pie" firstAttribute="top" secondItem="mtt-CT-puG" secondAttribute="bottom" id="MEz-X0-QW4"/>
+                            <constraint firstItem="KEn-XT-56N" firstAttribute="top" secondItem="HlS-2b-Pie" secondAttribute="bottom" constant="-64" id="cMk-m8-WeT"/>
+                            <constraint firstItem="HlS-2b-Pie" firstAttribute="leading" secondItem="Ma1-s3-pWm" secondAttribute="leadingMargin" constant="-16" id="isE-uF-wR8"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="qhP-4I-dV9" appends="YES" id="hsR-ik-uCN"/>
+                        </connections>
                     </view>
-                    <navigationItem key="navigationItem" id="a4M-NW-feQ"/>
-                    <nil key="simulatedTopBarMetrics"/>
+                    <navigationItem key="navigationItem" id="a4M-NW-feQ">
+                        <barButtonItem key="rightBarButtonItem" title="List" id="Dp2-fX-6KB">
+                            <connections>
+                                <segue destination="tk8-uX-Xqi" kind="push" id="YhW-8B-fog"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
                         <outlet property="mapView" destination="HlS-2b-Pie" id="7wm-Ng-iYE"/>
+                        <outlet property="tapGesture" destination="qhP-4I-dV9" id="Fgl-P3-OQv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hlW-Ar-O6C" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="qhP-4I-dV9">
+                    <connections>
+                        <action selector="didTap:" destination="lnv-ew-ohG" id="mpR-rJ-zuh"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="113" y="32"/>
+            <point key="canvasLocation" x="-73" y="32"/>
+        </scene>
+        <!--Data List View Controller Table View Controller-->
+        <scene sceneID="j0o-xN-Syx">
+            <objects>
+                <tableViewController id="tk8-uX-Xqi" customClass="DataListViewControllerTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="59" sectionHeaderHeight="22" sectionFooterHeight="22" id="4cI-EC-xpd">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LocationCell" rowHeight="59" id="QUb-t1-xty">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QUb-t1-xty" id="pAk-Uf-eYd">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2aj-Cm-Eg9">
+                                            <rect key="frame" x="8" y="8" width="304" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Sn-we-4y0">
+                                            <rect key="frame" x="8" y="30" width="304" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="HeadingCell" rowHeight="59" id="PWO-EB-ksZ">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PWO-EB-ksZ" id="9Oc-2A-rQv">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="tk8-uX-Xqi" id="owq-Xu-RL4"/>
+                            <outlet property="delegate" destination="tk8-uX-Xqi" id="pf1-vc-Ziw"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="s5e-s3-emt">
+                        <nil key="title"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="Ulh-60-RGM">
+                            <rect key="frame" x="96" y="7" width="128" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="First"/>
+                                <segment title="Second"/>
+                            </segments>
+                        </segmentedControl>
+                        <barButtonItem key="rightBarButtonItem" title="Map" id="h0X-rh-A5A"/>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jtX-ik-7Ix" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="363" y="-37"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

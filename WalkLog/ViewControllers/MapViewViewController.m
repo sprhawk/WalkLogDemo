@@ -14,6 +14,7 @@
 #import "EarthToMars.h"
 
 #import "MyLocationAnnotation.h"
+#import "DataCenter.h"
 
 @interface MapViewViewController () <MKMapViewDelegate, CLLocationManagerDelegate>
 {
@@ -27,6 +28,9 @@
 @property (nonatomic, assign, readwrite) BOOL isUserLocationSet;
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
+
+@property (strong, nonatomic) IBOutlet UITapGestureRecognizer *tapGesture;
+- (IBAction)didTap:(id)sender;
 @end
 
 @implementation MapViewViewController
@@ -48,6 +52,8 @@
         _locationManager = [[CLLocationManager alloc] init];
         _locationManager.delegate = self;
     }
+    
+    
     self.navigationController.navigationBarHidden = YES;
 }
 
@@ -125,21 +131,30 @@
 #pragma mark - Location operations
 - (void)startUpdatingLocation
 {
-    CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
-    if (kCLAuthorizationStatusAuthorized == status
-        || kCLAuthorizationStatusAuthorizedAlways == status
-        || kCLAuthorizationStatusAuthorizedWhenInUse == status) {
-//        [_locationManager startUpdatingLocation];
-        
-        self.mapView.showsUserLocation = YES;
-        self.mapView.userTrackingMode = MKUserTrackingModeFollowWithHeading;
-    }
-    else if(kCLAuthorizationStatusNotDetermined == status) {
-        [_locationManager requestWhenInUseAuthorization];
-    }
-    else if(kCLAuthorizationStatusDenied == status
-            || kCLAuthorizationStatusRestricted == status) {
-        
+    if([CLLocationManager locationServicesEnabled]) {
+        CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
+        if (kCLAuthorizationStatusAuthorized == status
+            || kCLAuthorizationStatusAuthorizedAlways == status
+            || kCLAuthorizationStatusAuthorizedWhenInUse == status
+            || (kCLAuthorizationStatusNotDetermined == status && ![_locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)])) {
+            [_locationManager startUpdatingLocation];
+            
+            if ([CLLocationManager headingAvailable]) {
+                [_locationManager startUpdatingHeading];
+            }
+            
+            self.mapView.showsUserLocation = YES;
+            self.mapView.userTrackingMode = MKUserTrackingModeFollowWithHeading;
+            
+            [_locationManager startMonitoringSignificantLocationChanges];
+        }
+        else if(kCLAuthorizationStatusNotDetermined == status) {
+            [_locationManager requestWhenInUseAuthorization]; // only 7.0 and above
+        }
+        else if(kCLAuthorizationStatusDenied == status
+                || kCLAuthorizationStatusRestricted == status) {
+            
+        }
     }
 }
 
@@ -153,16 +168,20 @@
 {
     CLLocation *l = [locations lastObject];
     if (l) {
+        [[DataCenter sharedCenter] insertLocation:l];
+        
         CLLocationCoordinate2D coor = l.coordinate;
         double lat = 0;
         double lon = 0;
         NSLog(@"CoreLocation location:lat:%f, lon:%f", coor.latitude, coor.longitude);
-
+        
+        
         mars_corrected_coordinate(coor.latitude, coor.longitude, &lat, &lon);
         CLLocationCoordinate2D c = [[EarthToMars sharedEarthToMars] marsCoordinateFromEarth:coor];
         NSLog(@"mars:calculated:lat:%f, lon:%f, lookup:lat:%f, lon:%f", lat, lon, c.latitude, c.longitude);
         
-        MyLocationAnnotation *a = [[MyLocationAnnotation alloc] init];
+        MyLocationAnnotation *a = nil;
+        a = [[MyLocationAnnotation alloc] init];
         a.coordinate = c;
         a.type = AnnotationTypeLookup;
         a.title = @"Lookup";
@@ -182,16 +201,34 @@
         self.calcAnnotation = a;
         [self.mapView addAnnotation:self.calcAnnotation];
         
-        a = [[MyLocationAnnotation alloc] init];
-        a.coordinate = coor;
-        a.type = AnnotationTypeEarth;
-        a.title = @"Earth";
-        if (self.earthAnnotation) {
-            [self.mapView removeAnnotation:self.earthAnnotation];
-        }
-        self.earthAnnotation = a;
-        [self.mapView addAnnotation:self.earthAnnotation];
+//        a = [[MyLocationAnnotation alloc] init];
+//        a.coordinate = coor;
+//        a.type = AnnotationTypeEarth;
+//        a.title = @"Earth";
+//        if (self.earthAnnotation) {
+//            [self.mapView removeAnnotation:self.earthAnnotation];
+//        }
+//        self.earthAnnotation = a;
+//        [self.mapView addAnnotation:self.earthAnnotation];
     }
 }
 
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    NSLog(@"locationManater:%@", error);
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateHeading:(CLHeading *)newHeading
+{
+    NSLog(@"heading:%@", newHeading);
+}
+
+- (BOOL)locationManagerShouldDisplayHeadingCalibration:(CLLocationManager *)manager
+{
+    return NO;
+}
+
+- (IBAction)didTap:(id)sender {
+    [self.navigationController setNavigationBarHidden:!self.navigationController.navigationBarHidden animated:YES];
+}
 @end
