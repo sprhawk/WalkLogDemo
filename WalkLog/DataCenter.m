@@ -95,7 +95,12 @@
 
 - (CLLocation *)locationAtIndex:(NSUInteger)index
 {
-    CLLocation *l = [self.selectLocationStatement locationAtIndex:index];
+    return [self locationAtIndex:index isForeground:NULL];
+}
+
+- (CLLocation *)locationAtIndex:(NSUInteger)index isForeground:(BOOL *)isForeground
+{
+    CLLocation *l = [self.selectLocationStatement locationAtIndex:index isForeground:isForeground];
     return l;
 }
 

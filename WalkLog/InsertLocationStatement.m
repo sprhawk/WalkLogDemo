@@ -11,8 +11,8 @@
 @implementation InsertLocationStatement
 + (id)statementWithYSqlite:(YSqlite *)ysqlite
 {
-    return [[self class] statementWithSql:@"insert into locations (latitude, longitude, haccuracy, altitude, vaccuracy, course, speed, timestamp)"
-                                            @"values(:latitude, :longitude, :haccuracy, :altitude, :vaccuracy, :course, :speed, :timestamp);"
+    return [[self class] statementWithSql:@"insert into locations (latitude, longitude, haccuracy, altitude, vaccuracy, course, speed, timestamp, foreground)"
+                                            @"values(:latitude, :longitude, :haccuracy, :altitude, :vaccuracy, :course, :speed, :timestamp, :foreground);"
                                   ysqlite:ysqlite];
 }
 
@@ -30,6 +30,8 @@
         int64_t t = (int64_t)([location.timestamp timeIntervalSince1970] * 1000);
         [self bindInt64:t key:@":timestamp"];
         
+        UIApplicationState state = [[UIApplication sharedApplication] applicationState];
+        [self bindInt:(UIApplicationStateActive == state)?1:0 key:@":foreground"];
         return [self execute];
     }
     return NO;

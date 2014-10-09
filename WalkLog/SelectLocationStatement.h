@@ -12,5 +12,5 @@
 @interface SelectLocationStatement : YSqliteStatement
 
 - (CLLocation *)locationAtIndex:(NSUInteger)index;
-
+- (CLLocation *)locationAtIndex:(NSUInteger)index isForeground:(BOOL *)isForeground;
 @end

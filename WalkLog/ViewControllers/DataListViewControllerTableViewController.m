@@ -71,12 +71,12 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LocationCell" forIndexPath:indexPath];
-    
-    CLLocation *loc = [[DataCenter sharedCenter] locationAtIndex:indexPath.row];
+    BOOL foreground;
+    CLLocation *loc = [[DataCenter sharedCenter] locationAtIndex:indexPath.row isForeground:&foreground];
     // Configure the cell...
     UILabel *l = (UILabel *)[cell.contentView viewWithTag:1];
-    l.text = [NSString stringWithFormat:@"(%d)lat:%f lon:%f (acc:%f)\nalt:%f (acc:%f)\ncourse:%f speed:%f",
-              _locationsCount - indexPath.row,
+    l.text = [NSString stringWithFormat:@"(%d:%@)lat:%f lon:%f (acc:%f)\nalt:%f (acc:%f)\ncourse:%f speed:%f",
+              (int)(_locationsCount - indexPath.row), foreground?@"f":@"b",
               loc.coordinate.latitude, loc.coordinate.longitude, loc.horizontalAccuracy,
               loc.altitude, loc.verticalAccuracy, loc.course, loc.speed];
     l = (UILabel *)[cell.contentView viewWithTag:2];

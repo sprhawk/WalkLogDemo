@@ -16,4 +16,6 @@
 - (BOOL)insertLocation:(CLLocation *)location;
 - (NSUInteger)locationsCount;
 - (CLLocation *)locationAtIndex:(NSUInteger)index;
+- (CLLocation *)locationAtIndex:(NSUInteger)index isForeground:(BOOL *)isForeground;
+
 @end

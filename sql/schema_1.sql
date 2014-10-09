@@ -7,6 +7,7 @@ create table if not exists locations
                                     vaccuracy real,
                                     course real,
                                     speed real,
-                                    timestamp integer);
+                                    timestamp integer,
+                                    foreground integer);
 
 
