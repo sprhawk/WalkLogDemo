@@ -11,7 +11,7 @@
 
 @interface DataListViewControllerTableViewController ()
 {
-    NSInteger locationsCount;
+    NSInteger _locationsCount;
 }
 
 @property (nonatomic, strong, readwrite) NSMutableSet *observers;
@@ -36,8 +36,7 @@
                                                                  object:nil
                                                                   queue:nil
                                                              usingBlock:^(NSNotification *note) {
-                                                                 locationsCount = [[DataCenter sharedCenter] locationsCount];
-                                                                 NSIndexPath *i = [NSIndexPath indexPathForRow:locationsCount - 1 inSection:0];
+                                                                 NSIndexPath *i = [NSIndexPath indexPathForRow:0 inSection:0];
                                                                  [SELF.tableView insertRowsAtIndexPaths:@[i] withRowAnimation:UITableViewRowAnimationAutomatic];
                                                              }];
     [self.observers addObject:observer];
@@ -61,8 +60,13 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    locationsCount = [[DataCenter sharedCenter] locationsCount];
-    return locationsCount;
+    _locationsCount = [[DataCenter sharedCenter] locationsCount];
+    return _locationsCount;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 77;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -71,7 +75,8 @@
     CLLocation *loc = [[DataCenter sharedCenter] locationAtIndex:indexPath.row];
     // Configure the cell...
     UILabel *l = (UILabel *)[cell.contentView viewWithTag:1];
-    l.text = [NSString stringWithFormat:@"lat:%f lon:%f (acc:%f) alt:%f (acc:%f) course:%f speed:%f",
+    l.text = [NSString stringWithFormat:@"(%d)lat:%f lon:%f (acc:%f)\nalt:%f (acc:%f)\ncourse:%f speed:%f",
+              _locationsCount - indexPath.row,
               loc.coordinate.latitude, loc.coordinate.longitude, loc.horizontalAccuracy,
               loc.altitude, loc.verticalAccuracy, loc.course, loc.speed];
     l = (UILabel *)[cell.contentView viewWithTag:2];

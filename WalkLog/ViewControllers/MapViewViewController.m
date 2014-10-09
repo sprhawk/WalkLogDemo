@@ -144,7 +144,7 @@
             }
             
             self.mapView.showsUserLocation = YES;
-            self.mapView.userTrackingMode = MKUserTrackingModeFollowWithHeading;
+            self.mapView.userTrackingMode = MKUserTrackingModeNone;
             
             [_locationManager startMonitoringSignificantLocationChanges];
         }
