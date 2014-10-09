@@ -137,6 +137,8 @@
             || kCLAuthorizationStatusAuthorizedAlways == status
             || kCLAuthorizationStatusAuthorizedWhenInUse == status
             || (kCLAuthorizationStatusNotDetermined == status && ![_locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)])) {
+            
+            _locationManager.distanceFilter = 10.0f;
             [_locationManager startUpdatingLocation];
             
             if ([CLLocationManager headingAvailable]) {
