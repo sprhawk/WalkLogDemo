@@ -14,7 +14,9 @@
     NSInteger _locationsCount;
 }
 
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segment;
 @property (nonatomic, strong, readwrite) NSMutableSet *observers;
+- (IBAction)selectionChanged:(id)sender;
 @end
 
 @implementation DataListViewControllerTableViewController
@@ -129,4 +131,17 @@
 }
 */
 
+- (IBAction)selectionChanged:(id)sender {
+    UISegmentedControl *s = sender;
+    switch(s.selectedSegmentIndex) {
+        case 1: // Inactive
+            break;
+        case 2: // Active
+            break;
+        case 0: // all
+        default:
+            break;
+    }
+    [self.tableView reloadData];
+}
 @end

@@ -1,3 +1,6 @@
 [submodule "lib/YSqliteStatement"]
 	path = lib/YSqliteStatement
 	url = git@github.com:sprhawk/YSqliteStatement.git
+[submodule "thirdparties/CocoaAsyncSocket"]
+	path = thirdparties/CocoaAsyncSocket
+	url = git@github.com:robbiehanson/CocoaAsyncSocket.git
