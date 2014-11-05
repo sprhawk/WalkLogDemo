@@ -91,6 +91,26 @@
 {
     [super viewDidAppear:animated];
     [self startUpdatingLocation];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSArray *a = [[DataCenter sharedCenter] allLocations];
+        NSLog(@"allLocations count:%d", a.count);
+        for (CLLocation *l in a) {
+            CLLocationCoordinate2D coor = l.coordinate;
+            double lat = 0.0f, lon = 0.0;
+            mars_corrected_coordinate(coor.latitude, coor.longitude, &lat, &lon);
+            CLLocationCoordinate2D c;
+            c.latitude = lat;
+            c.longitude = lon;
+            
+            MyLocationAnnotation *ann = nil;
+            ann = [[MyLocationAnnotation alloc] init];
+            ann.coordinate = c;
+            ann.type = AnnotationTypeCalculated;
+            ann.title = l.timestamp.description;
+            [self.mapView addAnnotation:ann];
+        }
+    });
 }
 
 - (void)didReceiveMemoryWarning
@@ -272,7 +292,7 @@
 }
 
 - (IBAction)didTap:(id)sender {
-    [self.navigationController setNavigationBarHidden:!self.navigationController.navigationBarHidden animated:YES];
+//    [self.navigationController setNavigationBarHidden:!self.navigationController.navigationBarHidden animated:YES];
 }
 
 - (IBAction)showHistory:(id)sender {
