@@ -10,16 +10,22 @@
 
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
+#import <CoreMotion/CoreMotion.h>
+
 #import "MarsCoordinate.h"
 #import "EarthToMars.h"
 
 #import "MyLocationAnnotation.h"
 #import "DataCenter.h"
+#import "NetworkCenter.h"
 
-@interface MapViewViewController () <MKMapViewDelegate, CLLocationManagerDelegate>
+@interface MapViewViewController () <MKMapViewDelegate, CLLocationManagerDelegate, UIActionSheetDelegate>
 {
     CLLocationManager * _locationManager;
 }
+
+@property (nonatomic, strong, readwrite) CMMotionManager *motionManager;
+@property (nonatomic, strong, readwrite) NSOperationQueue *queue;
 
 @property (nonatomic, strong, readwrite) id<MKAnnotation> calcAnnotation;
 @property (nonatomic, strong, readwrite) id<MKAnnotation> lookupAnnotation;
@@ -31,6 +37,7 @@
 
 @property (strong, nonatomic) IBOutlet UITapGestureRecognizer *tapGesture;
 - (IBAction)didTap:(id)sender;
+- (IBAction)showHistory:(id)sender;
 @end
 
 @implementation MapViewViewController
@@ -53,7 +60,30 @@
         _locationManager.delegate = self;
     }
     
-    
+    if (nil == self.motionManager) {
+        self.queue = [[NSOperationQueue alloc] init];
+        self.motionManager = [[CMMotionManager alloc] init];
+        if(self.motionManager.accelerometerAvailable) {
+            self.motionManager.accelerometerUpdateInterval = 0.1;
+            [self.motionManager startAccelerometerUpdatesToQueue:self.queue
+                                                     withHandler:^(CMAccelerometerData *accelerometerData, NSError *error) {
+//                                                         NSString *a = [NSString stringWithFormat:@"a:%f;%f;%f", accelerometerData.acceleration.x, accelerometerData.acceleration.y, accelerometerData.acceleration.z];
+//                                                         NSLog(@"%@", a);
+//                                                         NSData *d = [a dataUsingEncoding:NSUTF8StringEncoding];
+//                                                         [[NetworkCenter sharedCenter] sendData:d];
+                                                     }];
+        }
+        
+        if (self.motionManager.gyroAvailable) {
+            self.motionManager.gyroUpdateInterval = 0.1;
+            [self.motionManager startGyroUpdatesToQueue:self.queue
+                                            withHandler:^(CMGyroData *gyroData, NSError *error) {
+//                                                NSString *a = [NSString stringWithFormat:@"g:%f;%f;%f", gyroData.rotationRate.x, gyroData.rotationRate.y, gyroData.rotationRate.z];
+//                                                NSData *d = [a dataUsingEncoding:NSUTF8StringEncoding];
+//                                                [[NetworkCenter sharedCenter] sendData:d];
+                                            }];
+        }
+    }
     self.navigationController.navigationBarHidden = YES;
 }
 
@@ -139,7 +169,7 @@
             || (kCLAuthorizationStatusNotDetermined == status && ![_locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)])) {
             
             _locationManager.distanceFilter = 10.0f;
-            [_locationManager startUpdatingLocation];
+//            [_locationManager startUpdatingLocation];
             
             if ([CLLocationManager headingAvailable]) {
                 [_locationManager startUpdatingHeading];
@@ -172,11 +202,16 @@
     if (l) {
         [[DataCenter sharedCenter] insertLocation:l];
         
-        CLLocationCoordinate2D coor = l.coordinate;
+        CLLocationCoordinate2D coor;
+        coor = l.coordinate;
+//        coor.latitude = 39 * 360 +  56.7643;
+//        coor.longitude = 116 * 360 + 24.7349;
         double lat = 0;
         double lon = 0;
-        NSLog(@"CoreLocation location:lat:%f, lon:%f", coor.latitude, coor.longitude);
-        
+//        NSString *s = [NSString stringWithFormat:@"CoreLocation location:lat:%f, lon:%f", coor.latitude, coor.longitude];
+//        NSLog(@"%@", s);
+//        NSData *d = [s dataUsingEncoding:NSUTF8StringEncoding];
+//        [[NetworkCenter sharedCenter] sendData:d];
         
         mars_corrected_coordinate(coor.latitude, coor.longitude, &lat, &lon);
         CLLocationCoordinate2D c = [[EarthToMars sharedEarthToMars] marsCoordinateFromEarth:coor];
@@ -203,15 +238,15 @@
         self.calcAnnotation = a;
         [self.mapView addAnnotation:self.calcAnnotation];
         
-//        a = [[MyLocationAnnotation alloc] init];
-//        a.coordinate = coor;
-//        a.type = AnnotationTypeEarth;
-//        a.title = @"Earth";
-//        if (self.earthAnnotation) {
-//            [self.mapView removeAnnotation:self.earthAnnotation];
-//        }
-//        self.earthAnnotation = a;
-//        [self.mapView addAnnotation:self.earthAnnotation];
+        a = [[MyLocationAnnotation alloc] init];
+        a.coordinate = coor;
+        a.type = AnnotationTypeEarth;
+        a.title = @"Earth";
+        if (self.earthAnnotation) {
+            [self.mapView removeAnnotation:self.earthAnnotation];
+        }
+        self.earthAnnotation = a;
+        [self.mapView addAnnotation:self.earthAnnotation];
         
         if (UIApplicationStateBackground == [UIApplication sharedApplication].applicationState) {
             UILocalNotification *n = [[UILocalNotification alloc] init];
@@ -228,7 +263,7 @@
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateHeading:(CLHeading *)newHeading
 {
-    NSLog(@"heading:%@", newHeading);
+//    NSLog(@"heading:%@", newHeading);
 }
 
 - (BOOL)locationManagerShouldDisplayHeadingCalibration:(CLLocationManager *)manager
@@ -238,5 +273,29 @@
 
 - (IBAction)didTap:(id)sender {
     [self.navigationController setNavigationBarHidden:!self.navigationController.navigationBarHidden animated:YES];
+}
+
+- (IBAction)showHistory:(id)sender {
+    UIActionSheet *s = [[UIActionSheet alloc] initWithTitle:@"Type"
+                                                   delegate:self
+                                          cancelButtonTitle:@"Cancel"
+                                     destructiveButtonTitle:nil
+                                          otherButtonTitles:@"List", @"Map", nil];
+    [s showInView:self.view];
+}
+
+#pragma mark - ActionSheet
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    switch (buttonIndex) {
+        case 0:
+            [self performSegueWithIdentifier:@"showList" sender:nil];
+            break;
+        case 1:
+            [self performSegueWithIdentifier:@"showMap" sender:nil];
+            break;
+        default:
+            break;
+    }
 }
 @end

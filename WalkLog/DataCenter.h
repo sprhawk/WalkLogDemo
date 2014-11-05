@@ -17,5 +17,5 @@
 - (NSUInteger)locationsCount;
 - (CLLocation *)locationAtIndex:(NSUInteger)index;
 - (CLLocation *)locationAtIndex:(NSUInteger)index isForeground:(BOOL *)isForeground;
-
+- (NSArray *)allLocations;
 @end

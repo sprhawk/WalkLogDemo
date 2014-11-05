@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Lpn-N3-zhf">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Lpn-N3-zhf">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -54,7 +55,7 @@
                     <navigationItem key="navigationItem" id="a4M-NW-feQ">
                         <barButtonItem key="rightBarButtonItem" title="List" id="Dp2-fX-6KB">
                             <connections>
-                                <segue destination="tk8-uX-Xqi" kind="push" id="YhW-8B-fog"/>
+                                <action selector="showHistory:" destination="lnv-ew-ohG" id="iaq-EZ-tuq"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -62,6 +63,8 @@
                     <connections>
                         <outlet property="mapView" destination="HlS-2b-Pie" id="7wm-Ng-iYE"/>
                         <outlet property="tapGesture" destination="qhP-4I-dV9" id="Fgl-P3-OQv"/>
+                        <segue destination="tk8-uX-Xqi" kind="push" identifier="showList" id="dax-JS-cEf"/>
+                        <segue destination="T46-Is-niN" kind="push" identifier="showMap" id="8H6-vB-X4o"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hlW-Ar-O6C" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -71,7 +74,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-73" y="32"/>
+            <point key="canvasLocation" x="-49" y="27"/>
         </scene>
         <!--Data List View Controller Table View Controller-->
         <scene sceneID="j0o-xN-Syx">
@@ -129,11 +132,7 @@
                                 </connections>
                             </segmentedControl>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Map" id="h0X-rh-A5A">
-                            <connections>
-                                <segue destination="T46-Is-niN" kind="push" id="47w-c0-8AF"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Map" id="h0X-rh-A5A"/>
                     </navigationItem>
                     <connections>
                         <outlet property="segment" destination="IyB-IK-xNn" id="NSg-kb-Eit"/>
@@ -141,7 +140,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jtX-ik-7Ix" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="363" y="-37"/>
+            <point key="canvasLocation" x="389" y="-197"/>
         </scene>
         <!--History Map View Controller-->
         <scene sceneID="rXM-6y-q6J">
@@ -157,19 +156,33 @@
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VFx-fO-lNs">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <connections>
+                                    <outlet property="delegate" destination="T46-Is-niN" id="iRg-OD-65y"/>
+                                </connections>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
-                    <navigationItem key="navigationItem" id="fGx-rn-9Ik"/>
+                    <navigationItem key="navigationItem" id="fGx-rn-9Ik">
+                        <nil key="title"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="pNC-mh-3E3">
+                            <rect key="frame" x="68" y="6" width="185" height="32"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="All"/>
+                                <segment title="Inactive"/>
+                                <segment title="Active"/>
+                            </segments>
+                        </segmentedControl>
+                    </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="VFx-fO-lNs" id="qpd-go-r6V"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GaV-t0-Ik0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="836" y="-37"/>
+            <point key="canvasLocation" x="389" y="487"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

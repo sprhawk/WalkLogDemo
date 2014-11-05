@@ -135,9 +135,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				439A327B19E5432400E9B5E6 /* CoreMotion.framework in Frameworks */,
 				43821AD419F18C41007D7BDA /* SystemConfiguration.framework in Frameworks */,
 				43821AD219F18BF5007D7BDA /* CFNetwork.framework in Frameworks */,
-				439A327B19E5432400E9B5E6 /* CoreMotion.framework in Frameworks */,
 				439A327219E51D3A00E9B5E6 /* libYSqliteStatement.a in Frameworks */,
 				437DB22219D967D40011D8E6 /* libsqlite3.dylib in Frameworks */,
 				437DB21319D940C70011D8E6 /* MapKit.framework in Frameworks */,

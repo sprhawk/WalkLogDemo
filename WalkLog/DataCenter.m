@@ -104,4 +104,37 @@
     return l;
 }
 
+- (NSArray *)allLocations
+{
+    YSqliteStatement *s = [YSqliteStatement statementWithSql:@"select latitude, longitude, haccuracy, altitude, vaccuracy, course, speed, timestamp, foreground from locations where foreground=1 order by timestamp desc ;"
+                                                     ysqlite:self.ysqlite];
+    if([s execute]) {
+        NSMutableArray *a = [NSMutableArray arrayWithCapacity:10];
+        while ([s hasRow]) {
+            double lat, lon, hacc, alt, vacc, course, speed, timestamp;
+            lat = [s doubleValueAtIndex:0];
+            lon = [s doubleValueAtIndex:1];
+            hacc = [s doubleValueAtIndex:2];
+            alt = [s doubleValueAtIndex:3];
+            vacc = [s doubleValueAtIndex:4];
+            course = [s doubleValueAtIndex:5];
+            speed = [s doubleValueAtIndex:6];
+            timestamp = [s int64ValueAtIndex:7];
+            
+            CLLocationCoordinate2D coor;
+            coor.latitude = lat;
+            coor.longitude = lon;
+            CLLocation * l = [[CLLocation alloc] initWithCoordinate:coor
+                                              altitude:alt
+                                    horizontalAccuracy:hacc
+                                      verticalAccuracy:vacc
+                                             timestamp:[NSDate dateWithTimeIntervalSince1970:timestamp * 1.0f / 1000.0f]];
+            [a addObject:l];
+            [s step];
+        }
+        return a;
+    }
+    return nil;
+}
+
 @end

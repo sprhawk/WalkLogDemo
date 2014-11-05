@@ -69,7 +69,7 @@
 
 - (void)netServiceBrowser:(NSNetServiceBrowser *)aNetServiceBrowser didFindService:(NSNetService *)aNetService moreComing:(BOOL)moreComing
 {
-    NSLog(@"netServiceBrowserDidFindService:%@:%@", aNetService.domain, moreComing?@"true":@"false");
+    NSLog(@"netServiceBrowserDidFindService:%@%@%@:%@", aNetService.name, aNetService.type ,aNetService.domain, moreComing?@"true":@"false");
     if (nil == self.service) {
         self.service = aNetService;
         self.service.delegate = self;
