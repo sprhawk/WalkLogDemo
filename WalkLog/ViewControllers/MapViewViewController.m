@@ -51,13 +51,13 @@
     return self;
 }
 
-- (void)viewDidLoad
+- (void)awakeFromNib
 {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
     if (nil == _locationManager) {
         _locationManager = [[CLLocationManager alloc] init];
         _locationManager.delegate = self;
+        
+        [self startUpdatingLocation];
     }
     
     if (nil == self.motionManager) {
@@ -67,10 +67,10 @@
             self.motionManager.accelerometerUpdateInterval = 0.1;
             [self.motionManager startAccelerometerUpdatesToQueue:self.queue
                                                      withHandler:^(CMAccelerometerData *accelerometerData, NSError *error) {
-//                                                         NSString *a = [NSString stringWithFormat:@"a:%f;%f;%f", accelerometerData.acceleration.x, accelerometerData.acceleration.y, accelerometerData.acceleration.z];
-//                                                         NSLog(@"%@", a);
-//                                                         NSData *d = [a dataUsingEncoding:NSUTF8StringEncoding];
-//                                                         [[NetworkCenter sharedCenter] sendData:d];
+                                                         //                                                         NSString *a = [NSString stringWithFormat:@"a:%f;%f;%f", accelerometerData.acceleration.x, accelerometerData.acceleration.y, accelerometerData.acceleration.z];
+                                                         //                                                         NSLog(@"%@", a);
+                                                         //                                                         NSData *d = [a dataUsingEncoding:NSUTF8StringEncoding];
+                                                         //                                                         [[NetworkCenter sharedCenter] sendData:d];
                                                      }];
         }
         
@@ -78,19 +78,28 @@
             self.motionManager.gyroUpdateInterval = 0.1;
             [self.motionManager startGyroUpdatesToQueue:self.queue
                                             withHandler:^(CMGyroData *gyroData, NSError *error) {
-//                                                NSString *a = [NSString stringWithFormat:@"g:%f;%f;%f", gyroData.rotationRate.x, gyroData.rotationRate.y, gyroData.rotationRate.z];
-//                                                NSData *d = [a dataUsingEncoding:NSUTF8StringEncoding];
-//                                                [[NetworkCenter sharedCenter] sendData:d];
+                                                //                                                NSString *a = [NSString stringWithFormat:@"g:%f;%f;%f", gyroData.rotationRate.x, gyroData.rotationRate.y, gyroData.rotationRate.z];
+                                                //                                                NSData *d = [a dataUsingEncoding:NSUTF8StringEncoding];
+                                                //                                                [[NetworkCenter sharedCenter] sendData:d];
                                             }];
         }
     }
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+    
     self.navigationController.navigationBarHidden = YES;
+    
+    self.mapView.showsUserLocation = YES;
+    self.mapView.userTrackingMode = MKUserTrackingModeNone;
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [self startUpdatingLocation];
     
     dispatch_async(dispatch_get_main_queue(), ^{
         NSArray *a = [[DataCenter sharedCenter] allLocations];
@@ -185,7 +194,6 @@
         CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
         if (kCLAuthorizationStatusAuthorized == status
             || kCLAuthorizationStatusAuthorizedAlways == status
-            || kCLAuthorizationStatusAuthorizedWhenInUse == status
             || (kCLAuthorizationStatusNotDetermined == status && ![_locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)])) {
             
             _locationManager.distanceFilter = 10.0f;
@@ -195,13 +203,12 @@
                 [_locationManager startUpdatingHeading];
             }
             
-            self.mapView.showsUserLocation = YES;
-            self.mapView.userTrackingMode = MKUserTrackingModeNone;
-            
             [_locationManager startMonitoringSignificantLocationChanges];
         }
-        else if(kCLAuthorizationStatusNotDetermined == status) {
-            [_locationManager requestWhenInUseAuthorization]; // only 7.0 and above
+        else if(kCLAuthorizationStatusNotDetermined == status
+                || kCLAuthorizationStatusAuthorizedWhenInUse == status
+                ) {
+            [_locationManager requestAlwaysAuthorization]; // only 7.0 and above
         }
         else if(kCLAuthorizationStatusDenied == status
                 || kCLAuthorizationStatusRestricted == status) {
